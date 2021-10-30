@@ -1,0 +1,78 @@
+#Yaml for deploying the satisfactory server to a k8 cluster
+
+# Creates the namespace satisfactory-server
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: satisfactory-dedicated
+---
+#Create the PVC for rust-data
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: satisfactory-data
+  namespace: satisfactory-dedicated
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 40Gi
+--- 
+#Create the deployment for satisfactory
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-satisfactory-dedicated
+  namespace: satisfactory-dedicated
+spec:
+  selector:
+    matchLabels:
+      app: server-satisfactory-dedicated
+  template:
+    metadata:
+      labels:
+        app: server-satisfactory-dedicated
+    spec:
+      containers:
+      - image: docker.lootbot.live/rust:1.0.3
+        name: server-satisfactory-dedicated
+        ports:
+          - name: server-15777
+            containerPort: 15777
+            protocol: UDP
+          - name: server-15000
+            containerPort: 15000
+            protocol: UDP
+          - name: server-7777
+            containerPort: 7777
+            protocol: UDP
+        volumeMounts:
+        - name: satisfactory-data
+          mountPath: /home/steam/Satisfactory-dedicated
+      volumes:
+      - name: satisfactory-data
+        persistentVolumeClaim:
+          claimName: satisfactory-data
+          readOnly: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server-satisfactory-dedicated
+  namespace: satisfactory-dedicated
+spec:
+  type: NodePort
+  ports:
+  - port: 15777
+    nodePort: 30001
+    name: server-15777
+  - port: 15000
+    nodePort: 30002
+    name: server-15000
+  - port: 7777
+    nodePort: 30003
+    name: server-7777
+  selector:
+    app: server-satisfactory-dedicated
+---
