@@ -1,5 +1,5 @@
 ###########################################################
-# Dockerfile that unfortantly builds a satisfactory docker container
+# Dockerfile that builds a satisfactory docker container
 ###########################################################
 FROM cm2network/steamcmd:root
 
@@ -17,9 +17,6 @@ RUN set -x \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
 		wget \
 		ca-certificates \
-		lib32z1 \
-		libgdiplus \
-		mono-devel \
 		libsdl2-2.0-0:i386 \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	&& wget --max-redirect=30 "${DLURL}/master/etc/entry.sh" -O "${HOMEDIR}/entry.sh" \

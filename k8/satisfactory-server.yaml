@@ -6,7 +6,7 @@ kind: Namespace
 metadata:
   name: satisfactory-dedicated
 ---
-#Create the PVC for rust-data
+#Create the PVC for satisfactory-data
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
