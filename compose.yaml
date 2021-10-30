@@ -1,7 +1,7 @@
 version: "3"
 services:
   satisfactory:
-    build: .
+    image: ghcr.io/william86370/satisfactory:main
     restart: always
     ports:
       - 15777:15777/udp
