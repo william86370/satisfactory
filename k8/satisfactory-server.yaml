@@ -17,7 +17,7 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 40Gi
+      storage: 20Gi
 --- 
 #Create the deployment for satisfactory
 apiVersion: apps/v1
@@ -35,7 +35,7 @@ spec:
         app: server-satisfactory-dedicated
     spec:
       containers:
-      - image: docker.lootbot.live/rust:1.0.3
+      - image: ghcr.io/william86370/satisfactory:main
         name: server-satisfactory-dedicated
         ports:
           - name: server-15777
