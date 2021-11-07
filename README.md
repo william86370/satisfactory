@@ -1,5 +1,5 @@
 # satisfactory
-[![Anchore Container Scan](https://github.com/william86370/satisfactory/actions/workflows/anchore-analysis.yml/badge.svg)](https://github.com/william86370/satisfactory/actions/workflows/anchore-analysis.yml)
+[![Anchore Container Scan](https://github.com/william86370/satisfactory/actions/workflows/anchore-analysis.yml/badge.svg?branch=main)](https://github.com/william86370/satisfactory/actions/workflows/anchore-analysis.yml)
 [![Docker](https://github.com/william86370/satisfactory/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/william86370/satisfactory/actions/workflows/docker-publish.yml)
 
 Just a simple satisfactory server in a container for ez hosting.
