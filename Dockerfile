@@ -5,7 +5,7 @@
 # https://github.com/CM2Walki/steamcmd/blob/master/buster-root/Dockerfile
 # Having everything in one command allows for a decreased image size
 
-FROM debian:buster-slim
+FROM debian:11-slim
 
 LABEL maintainer="william86370@gmail.com"
 ARG PUID=1000
@@ -31,7 +31,7 @@ RUN set -x \
 	&& apt-get upgrade -y \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
 		lib32stdc++6 \
-		lib32gcc1 \
+		lib32gcc-s1 \
 		wget \
 		ca-certificates \
 		libsdl2-2.0-0:i386 \
