@@ -13,4 +13,4 @@ bash "${STEAMCMDDIR}/steamcmd.sh" +login anonymous \
 
 cd "${STEAMAPPDIR}"
 # Start Server
-./FactoryServer.sh
+./FactoryServer.sh -NOSTEAM

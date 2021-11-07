@@ -29,6 +29,9 @@ spec:
   selector:
     matchLabels:
       app: server-satisfactory-dedicated
+  replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -37,6 +40,9 @@ spec:
       containers:
       - image: ghcr.io/william86370/satisfactory:main
         name: server-satisfactory-dedicated
+        resources:
+          requests:
+            memory: "12G"
         ports:
           - name: server-15777
             containerPort: 15777
@@ -49,7 +55,16 @@ spec:
             protocol: UDP
         volumeMounts:
         - name: satisfactory-data
-          mountPath: /home/steam/Satisfactory-dedicated
+          mountPath: /Satisfactory-dedicated
+      - name: browser
+        image: filebrowser/filebrowser
+        ports:
+          - containerPort: 80
+            name: http
+        volumeMounts:
+          - name: satisfactory-data
+            mountPath: /srv
+            subPath: "saves"
       volumes:
       - name: satisfactory-data
         persistentVolumeClaim:
@@ -67,12 +82,28 @@ spec:
   - port: 15777
     nodePort: 30001
     name: server-15777
+    protocol: UDP
   - port: 15000
     nodePort: 30002
     name: server-15000
+    protocol: UDP
   - port: 7777
     nodePort: 30003
     name: server-7777
+    protocol: UDP
   selector:
     app: server-satisfactory-dedicated
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: satisfactory-dedicated
+  name: satisfactory-browser-service
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: server-satisfactory-dedicated

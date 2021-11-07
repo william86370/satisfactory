@@ -1,0 +1,5 @@
+.github
+etc/
+k8/
+compose.yaml
+README.md

@@ -8,4 +8,4 @@ services:
       - 15000:15000/udp
       - 7777:7777/udp
     volumes:
-      - ./data:/home/steam/Satisfactory-dedicated
+      - ./data:/Satisfactory-dedicated
