@@ -5,7 +5,7 @@
 # https://github.com/CM2Walki/steamcmd/blob/master/buster-root/Dockerfile
 # Having everything in one command allows for a decreased image size
 
-FROM debian:11-slim
+FROM ubuntu:20.04
 
 LABEL maintainer="william86370@gmail.com"
 ARG PUID=1000
