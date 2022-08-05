@@ -1,0 +1,11 @@
+#Create the PVC for satisfactory-data
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: satisfactory-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi

@@ -1,0 +1,6 @@
+namespace: satisfactory-dedicated
+resources:
+- namespace.yaml
+- volume.yaml
+- deployment.yaml
+- service.yaml
