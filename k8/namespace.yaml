@@ -1,0 +1,5 @@
+# Creates the namespace satisfactory-server
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: satisfactory-dedicated

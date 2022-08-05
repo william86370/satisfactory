@@ -5,7 +5,7 @@
 # https://github.com/CM2Walki/steamcmd/blob/master/buster-root/Dockerfile
 # Having everything in one command allows for a decreased image size
 
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 LABEL maintainer="william86370@gmail.com"
 ARG PUID=1000
@@ -46,7 +46,7 @@ RUN set -x \
                 && mkdir -p \"${HOMEDIR}/.steam/sdk32\" \
                 && ln -s \"${STEAMCMDDIR}/linux32/steamclient.so\" \"${HOMEDIR}/.steam/sdk32/steamclient.so\" \
                 && ln -s \"${STEAMCMDDIR}/linux32/steamcmd\" \"${STEAMCMDDIR}/linux32/steam\" \
-                && ln -s \"${STEAMCMDDIR}/steamcmd.sh\" \"${STEAMCMDDIR}/steam.sh\"" \
+                && ln -s \"${STEAMCMDDIR}/steamcmd.sh\" \"${STEAMCMDDIR}/steam.sh \"" \
 	&& ln -s "${STEAMCMDDIR}/linux32/steamclient.so" "/usr/lib/i386-linux-gnu/steamclient.so" \
 	&& ln -s "${STEAMCMDDIR}/linux64/steamclient.so" "/usr/lib/x86_64-linux-gnu/steamclient.so" \
 	&& mkdir -p "${STEAMAPPDIR}" \

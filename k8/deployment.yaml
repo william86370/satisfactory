@@ -1,0 +1,61 @@
+#Create the deployment for satisfactory
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-satisfactory-dedicated
+spec:
+  selector:
+    matchLabels:
+      app: server-satisfactory-dedicated
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: server-satisfactory-dedicated
+    spec:
+      containers:
+      - image: ghcr.io/william86370/satisfactory
+        name: satisfactory-dedicated
+        resources:
+          requests:
+            memory: "4G"
+            cpu: "1"
+          limits:
+            memory: "12G"
+            cpu: "4"
+        ports:
+          - name: server-15777
+            containerPort: 15777
+            protocol: UDP
+          - name: server-15000
+            containerPort: 15000
+            protocol: UDP
+          - name: server-7777
+            containerPort: 7777
+            protocol: UDP
+        volumeMounts:
+        - name: satisfactory-data
+          mountPath: /Satisfactory-dedicated
+      - name: save-browser
+        image: filebrowser/filebrowser
+        ports:
+          - containerPort: 80
+            name: http
+        volumeMounts:
+          - name: satisfactory-data
+            mountPath: /srv
+            subPath: "saves"
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "100m"
+          limits:
+            memory: "100Mi"
+            cpu: "100m"
+      volumes:
+      - name: satisfactory-data
+        persistentVolumeClaim:
+          claimName: satisfactory-data
+          readOnly: false
